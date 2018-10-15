@@ -57,5 +57,30 @@ class MobileDocTests: XCTestCase {
         let mobiledoc = try! JSONDecoder().decode(Mobiledoc.self, from: raw.data(using: .utf8)!)
         XCTAssertEqual(render(mobiledoc), "Non-markdowned stuff\nThis is regular text")
     }
+    
+    func testReencoding() {
+        let mobiledoc = Mobiledoc(
+            version: "0.3.1",
+            markups: ["b"],
+            cards: [
+                MarkdownCard("this is a *thing*")
+            ],
+            sections: [
+                CardSection(cardIndex:0),
+                ImageSection(src: "https://cdn.bulbagarden.net/upload/thumb/5/5d/010Caterpie.png/250px-010Caterpie.png"),
+                ListSection(tagName: .ol, markers: [Marker(textType: 0, markupIndexes: [0], numberOfClosedMarkups: 1, value: "bold?")]),
+                MarkerSection(tagName: .h1, markers: [Marker(textType: 0, markupIndexes: [], numberOfClosedMarkups: 0, value: "header?")])
+            ]
+        )
+        
+        do {
+            let encoded = try JSONEncoder().encode(mobiledoc)
+            let decoded = try JSONDecoder().decode(Mobiledoc.self, from: encoded)
+        
+            XCTAssertEqual(mobiledoc, decoded)
+        } catch {
+            XCTFail(String(describing: error))
+        }
+    }
 }
 
