@@ -49,13 +49,13 @@ class MobileDocTests: XCTestCase {
             return
         }
         
-        XCTAssertEqual(section.markdown, "Hmmm")
+        XCTAssertEqual(section.markers.first?.value, "Hmmm")
     }
     
     func testDecodingProblemPost() {
         let raw = "{\"version\":\"0.3.1\",\"atoms\":[],\"cards\":[[\"markdown\",{\"markdown\":\"Non-markdowned stuff\"}]],\"markups\":[],\"sections\":[[10,0],[1,\"p\",[[0,[],0,\"This is regular text\"]]]]}"
         let mobiledoc = try! JSONDecoder().decode(Mobiledoc.self, from: raw.data(using: .utf8)!)
-        XCTAssertEqual(mobiledoc.contents, "Non-markdowned stuff\nThis is regular text")
+        XCTAssertEqual(render(mobiledoc), "Non-markdowned stuff\nThis is regular text")
     }
 }
 

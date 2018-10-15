@@ -4,34 +4,16 @@
 
 import Foundation
 
-enum MobiledocErrors: Error {
+public enum MobiledocErrors: Error {
     case missingMarkdown
 }
 
-struct Mobiledoc: Codable {
-    let version: String
-    let markups: [String]
-    let atoms = [String]()
-    let cards: [MobiledocMarkdownCard]
-    let sections: [MobiledocSection]
-    
-    var contents: String {
-        return sections.map({ (section) -> String in
-            if let section = section as? MobiledocMarkerSection {
-                return section.markdown
-            }
-            if let section = section as? MobiledocImageSection {
-                return "![](\(section.src)"
-            }
-            if let section = section as? MobiledocCardSection {
-                return cards[section.cardIndex].markdown
-            }
-            if let section = section as? MobiledocListSection {
-                return section.markdown
-            }
-            return ""
-        }).joined(separator: "\n")
-    }
+public struct Mobiledoc: Codable {
+    public let version: String
+    public let markups: [String]
+    public let atoms = [String]()
+    public let cards: [MobiledocMarkdownCard]
+    public let sections: [MobiledocSection]
     
     enum CodingKeys: CodingKey {
         case version
@@ -48,7 +30,7 @@ struct Mobiledoc: Codable {
         self.sections = sections
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         version = try container.decode(String.self, forKey: .version)
@@ -68,11 +50,11 @@ struct Mobiledoc: Codable {
                 let src = try sectionContainer.decode(String.self)
                 parsed.append(MobiledocImageSection(src: src))
             case .markup:
-                let tagName = try sectionContainer.decode(String.self)
+                let tagName = try sectionContainer.decode(MobiledocSectionTagName.self)
                 let markers = try sectionContainer.decode([MobiledocMarker].self)
                 parsed.append(MobiledocMarkerSection(tagName: tagName, markers: markers))
             case .list:
-                let tagName = try sectionContainer.decode(String.self)
+                let tagName = try sectionContainer.decode(MobiledocSectionTagName.self)
                 let markers = try sectionContainer.decode([MobiledocMarker].self)
                 parsed.append(MobiledocListSection(tagName: tagName, markers: markers))
             }
@@ -80,7 +62,7 @@ struct Mobiledoc: Codable {
         sections = parsed
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(version, forKey: .version)
         try container.encode(markups, forKey: .markups)
@@ -98,7 +80,7 @@ struct Mobiledoc: Codable {
             }
             if let section = section as? MobiledocMarkerSection {
                 try sectionContainer.encode(MobiledocSectionType.markup)
-                try sectionContainer.encode(section.tagName)
+                try sectionContainer.encode(section.tagName.rawValue)
                 try sectionContainer.encode(section.markers)
             }
             if let section = section as? MobiledocCardSection {
@@ -109,7 +91,7 @@ struct Mobiledoc: Codable {
     }
 }
 
-enum MobiledocSectionTagName: String {
+public enum MobiledocSectionTagName: String, Codable {
     case aside
     case blockquote
     case h1
@@ -128,14 +110,14 @@ enum MobiledocSectionType: Int, Codable {
     case card = 10
 }
 
-struct MobiledocMarkdownCard: Codable {
-    let markdown: String
+public struct MobiledocMarkdownCard: Codable {
+    public let markdown: String
     
-    init(_ markdown: String) {
+    public init(_ markdown: String) {
         self.markdown = markdown
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         var values = try decoder.unkeyedContainer()
         let title = try values.decode(String.self)
         if title != "card-markdown" && title != "markdown" {
@@ -146,7 +128,7 @@ struct MobiledocMarkdownCard: Codable {
         self.markdown = realStuff["markdown"]!
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try  container.encode("card-markdown")
         try container.encode(["cardName": "card-markdown", "markdown": markdown])
@@ -155,41 +137,33 @@ struct MobiledocMarkdownCard: Codable {
 
 // Sections
 
-protocol MobiledocSection {}
+public protocol MobiledocSection {}
 
-struct MobiledocListSection: MobiledocSection {
-    let tagName: String
-    let markers: [MobiledocMarker]
+public struct MobiledocListSection: MobiledocSection {
+    public let tagName: MobiledocSectionTagName
+    public let markers: [MobiledocMarker]
+}
+
+public struct MobiledocImageSection: MobiledocSection {
+    public let src: String
+}
+
+public struct MobiledocCardSection: MobiledocSection {
+    public let cardIndex: Int
+}
+
+public struct MobiledocMarkerSection: MobiledocSection {
+    public let tagName: MobiledocSectionTagName
+    public let markers: [MobiledocMarker]
+}
+
+public struct MobiledocMarker: Codable {
+    public let textType: Int
+    public let markupIndexes: [Int]
+    public let numberOfClosedMarkups: Int
+    public let value: String
     
-    var markdown: String {
-        return markers.map({ "* \($0.value)" }).joined(separator: "\n")
-    }
-}
-
-struct MobiledocImageSection: MobiledocSection {
-    let src: String
-}
-
-struct MobiledocCardSection: MobiledocSection {
-    let cardIndex: Int
-}
-
-struct MobiledocMarkerSection: MobiledocSection {
-    var markdown: String {
-        return markers.map({ $0.value }).joined(separator: "\n")
-    }
-    
-    let tagName: String
-    let markers: [MobiledocMarker]
-}
-
-struct MobiledocMarker: Codable {
-    let textType: Int
-    let markupIndexes: [Int]
-    let numberOfClosedMarkups: Int
-    let value: String
-    
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         
         textType = try container.decode(Int.self)
