@@ -7,4 +7,4 @@ Mobiledoc is a format largely used in publishing projects and officially support
 You can read about the format [on the mobiledoc website](https://github.com/bustle/mobiledoc-kit/blob/master/MOBILEDOC.md)
 
 
-Some details of the format are not currently supported, such as `atoms`. PR's or at least failing tests are welcome to improve the project.
+Some details of the format are not currently supported, such as `atoms`. PR's or at least failing tests are welcome to improve the project. Test coverage now is just over 95%. Please don't lower that.
