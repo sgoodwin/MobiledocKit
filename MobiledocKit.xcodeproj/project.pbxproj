@@ -10,6 +10,11 @@
 		9B63F51A2174E9B8008863BF /* MobiledocKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B63F5102174E9B8008863BF /* MobiledocKit.framework */; };
 		9B63F51F2174E9B8008863BF /* MobiledocKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B63F51E2174E9B8008863BF /* MobiledocKitTests.swift */; };
 		9B63F5212174E9B8008863BF /* MobiledocKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B63F5132174E9B8008863BF /* MobiledocKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B63F52B2174E9D6008863BF /* MobileDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B63F52A2174E9D6008863BF /* MobileDoc.swift */; };
+		9B870C022174EB71006CB244 /* MobileDocTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B870C012174EB71006CB244 /* MobileDocTests.swift */; };
+		9B870C042174EBDE006CB244 /* mobiledoccard.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B870C032174EBDE006CB244 /* mobiledoccard.json */; };
+		9B870C062174EBEC006CB244 /* invalidtitlemarkdowncard.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B870C052174EBEC006CB244 /* invalidtitlemarkdowncard.json */; };
+		9B870C082174EBFD006CB244 /* markdowncard.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B870C072174EBFD006CB244 /* markdowncard.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +34,11 @@
 		9B63F5192174E9B8008863BF /* MobiledocKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobiledocKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B63F51E2174E9B8008863BF /* MobiledocKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobiledocKitTests.swift; sourceTree = "<group>"; };
 		9B63F5202174E9B8008863BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B63F52A2174E9D6008863BF /* MobileDoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileDoc.swift; sourceTree = "<group>"; };
+		9B870C012174EB71006CB244 /* MobileDocTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileDocTests.swift; sourceTree = "<group>"; };
+		9B870C032174EBDE006CB244 /* mobiledoccard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mobiledoccard.json; sourceTree = "<group>"; };
+		9B870C052174EBEC006CB244 /* invalidtitlemarkdowncard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = invalidtitlemarkdowncard.json; sourceTree = "<group>"; };
+		9B870C072174EBFD006CB244 /* markdowncard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = markdowncard.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +83,7 @@
 			children = (
 				9B63F5132174E9B8008863BF /* MobiledocKit.h */,
 				9B63F5142174E9B8008863BF /* Info.plist */,
+				9B63F52A2174E9D6008863BF /* MobileDoc.swift */,
 			);
 			path = MobiledocKit;
 			sourceTree = "<group>";
@@ -80,8 +91,12 @@
 		9B63F51D2174E9B8008863BF /* MobiledocKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				9B870C072174EBFD006CB244 /* markdowncard.json */,
+				9B870C052174EBEC006CB244 /* invalidtitlemarkdowncard.json */,
+				9B870C032174EBDE006CB244 /* mobiledoccard.json */,
 				9B63F51E2174E9B8008863BF /* MobiledocKitTests.swift */,
 				9B63F5202174E9B8008863BF /* Info.plist */,
+				9B870C012174EB71006CB244 /* MobileDocTests.swift */,
 			);
 			path = MobiledocKitTests;
 			sourceTree = "<group>";
@@ -148,6 +163,7 @@
 				TargetAttributes = {
 					9B63F50F2174E9B8008863BF = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 					9B63F5182174E9B8008863BF = {
 						CreatedOnToolsVersion = 10.0;
@@ -184,6 +200,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B870C042174EBDE006CB244 /* mobiledoccard.json in Resources */,
+				9B870C082174EBFD006CB244 /* markdowncard.json in Resources */,
+				9B870C062174EBEC006CB244 /* invalidtitlemarkdowncard.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B63F52B2174E9D6008863BF /* MobileDoc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B870C022174EB71006CB244 /* MobileDocTests.swift in Sources */,
 				9B63F51F2174E9B8008863BF /* MobiledocKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,6 +362,7 @@
 		9B63F5252174E9B8008863BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -358,6 +380,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.roundwallsoftware.MobiledocKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -366,6 +389,7 @@
 		9B63F5262174E9B8008863BF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -391,6 +415,7 @@
 		9B63F5282174E9B8008863BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SYSB7DM9AH;
 				INFOPLIST_FILE = MobiledocKitTests/Info.plist;
@@ -409,6 +434,7 @@
 		9B63F5292174E9B8008863BF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SYSB7DM9AH;
 				INFOPLIST_FILE = MobiledocKitTests/Info.plist;
