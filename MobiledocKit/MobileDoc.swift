@@ -12,8 +12,8 @@ public struct Mobiledoc: Codable {
     public let version: String
     public let markups: [String]
     public let atoms = [String]()
-    public let cards: [MobiledocMarkdownCard]
-    public let sections: [MobiledocSection]
+    public let cards: [MarkdownCard]
+    public let sections: [Section]
     
     enum CodingKeys: CodingKey {
         case version
@@ -23,7 +23,7 @@ public struct Mobiledoc: Codable {
         case sections
     }
     
-    init(version: String, markups: [String], cards: [MobiledocMarkdownCard], sections: [MobiledocSection]) {
+    public init(version: String, markups: [String], cards: [MarkdownCard], sections: [Section]) {
         self.version = version
         self.markups = markups
         self.cards = cards
@@ -34,29 +34,29 @@ public struct Mobiledoc: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         version = try container.decode(String.self, forKey: .version)
-        cards = try container.decode([MobiledocMarkdownCard].self, forKey: .cards)
+        cards = try container.decode([MarkdownCard].self, forKey: .cards)
         markups = try container.decode([String].self, forKey: .markups)
         
-        var parsed = [MobiledocSection]()
+        var parsed = [Section]()
         var sectionsContainer = try container.nestedUnkeyedContainer(forKey: .sections)
         while !sectionsContainer.isAtEnd {
             var sectionContainer = try sectionsContainer.nestedUnkeyedContainer()
-            let sectionType = try sectionContainer.decode(MobiledocSectionType.self)
+            let sectionType = try sectionContainer.decode(SectionType.self)
             switch sectionType {
             case .card:
                 let index = try sectionContainer.decode(Int.self)
-                parsed.append(MobiledocCardSection(cardIndex: index))
+                parsed.append(CardSection(cardIndex: index))
             case .image:
                 let src = try sectionContainer.decode(String.self)
-                parsed.append(MobiledocImageSection(src: src))
+                parsed.append(ImageSection(src: src))
             case .markup:
-                let tagName = try sectionContainer.decode(MobiledocSectionTagName.self)
-                let markers = try sectionContainer.decode([MobiledocMarker].self)
-                parsed.append(MobiledocMarkerSection(tagName: tagName, markers: markers))
+                let tagName = try sectionContainer.decode(SectionTagName.self)
+                let markers = try sectionContainer.decode([Marker].self)
+                parsed.append(MarkerSection(tagName: tagName, markers: markers))
             case .list:
-                let tagName = try sectionContainer.decode(MobiledocSectionTagName.self)
-                let markers = try sectionContainer.decode([MobiledocMarker].self)
-                parsed.append(MobiledocListSection(tagName: tagName, markers: markers))
+                let tagName = try sectionContainer.decode(SectionTagName.self)
+                let markers = try sectionContainer.decode([Marker].self)
+                parsed.append(ListSection(tagName: tagName, markers: markers))
             }
         }
         sections = parsed
@@ -74,24 +74,24 @@ public struct Mobiledoc: Codable {
             
             var sectionContainer = sectionsContainer.nestedUnkeyedContainer()
             
-            if let section = section as? MobiledocImageSection {
-                try sectionContainer.encode(MobiledocSectionType.image)
+            if let section = section as? ImageSection {
+                try sectionContainer.encode(SectionType.image)
                 try sectionContainer.encode(section.src)
             }
-            if let section = section as? MobiledocMarkerSection {
-                try sectionContainer.encode(MobiledocSectionType.markup)
+            if let section = section as? MarkerSection {
+                try sectionContainer.encode(SectionType.markup)
                 try sectionContainer.encode(section.tagName.rawValue)
                 try sectionContainer.encode(section.markers)
             }
-            if let section = section as? MobiledocCardSection {
-                try sectionContainer.encode(MobiledocSectionType.card)
+            if let section = section as? CardSection {
+                try sectionContainer.encode(SectionType.card)
                 try sectionContainer.encode(section.cardIndex)
             }
         }
     }
 }
 
-public enum MobiledocSectionTagName: String, Codable {
+public enum SectionTagName: String, Codable {
     case aside
     case blockquote
     case h1
@@ -103,14 +103,14 @@ public enum MobiledocSectionTagName: String, Codable {
     case p
 }
 
-enum MobiledocSectionType: Int, Codable {
+enum SectionType: Int, Codable {
     case markup = 1
     case image = 2
     case list = 3
     case card = 10
 }
 
-public struct MobiledocMarkdownCard: Codable {
+public struct MarkdownCard: Codable {
     public let markdown: String
     
     public init(_ markdown: String) {
@@ -137,31 +137,56 @@ public struct MobiledocMarkdownCard: Codable {
 
 // Sections
 
-public protocol MobiledocSection {}
+public protocol Section {}
 
-public struct MobiledocListSection: MobiledocSection {
-    public let tagName: MobiledocSectionTagName
-    public let markers: [MobiledocMarker]
+public struct ListSection: Section {
+    public let tagName: SectionTagName
+    public let markers: [Marker]
+    
+    public init(tagName: SectionTagName, markers: [Marker]) {
+        self.tagName = tagName
+        self.markers = markers
+    }
 }
 
-public struct MobiledocImageSection: MobiledocSection {
+public struct ImageSection: Section {
     public let src: String
+    
+    public init(src: String) {
+        self.src = src
+    }
 }
 
-public struct MobiledocCardSection: MobiledocSection {
+public struct CardSection: Section {
     public let cardIndex: Int
+    
+    public init(cardIndex: Int) {
+        self.cardIndex = cardIndex
+    }
 }
 
-public struct MobiledocMarkerSection: MobiledocSection {
-    public let tagName: MobiledocSectionTagName
-    public let markers: [MobiledocMarker]
+public struct MarkerSection: Section {
+    public let tagName: SectionTagName
+    public let markers: [Marker]
+    
+    public init(tagName: SectionTagName, markers: [Marker]) {
+        self.tagName = tagName
+        self.markers = markers
+    }
 }
 
-public struct MobiledocMarker: Codable {
+public struct Marker: Codable {
     public let textType: Int
     public let markupIndexes: [Int]
     public let numberOfClosedMarkups: Int
     public let value: String
+    
+    public init(textType: Int, markupIndexes: [Int], numberOfClosedMarkups: Int, value: String) {
+        self.textType = textType
+        self.markupIndexes = markupIndexes
+        self.numberOfClosedMarkups = numberOfClosedMarkups
+        self.value = value
+    }
     
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()

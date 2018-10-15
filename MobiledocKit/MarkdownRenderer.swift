@@ -6,16 +6,16 @@ import Foundation
 
 public func render(_ doc: Mobiledoc) -> String {
     return doc.sections.map({ (section) -> String in
-        if let section = section as? MobiledocMarkerSection {
+        if let section = section as? MarkerSection {
             return section.markers.map({ $0.value }).joined(separator: "\n")
         }
-        if let section = section as? MobiledocImageSection {
+        if let section = section as? ImageSection {
             return "![](\(section.src)"
         }
-        if let section = section as? MobiledocCardSection {
+        if let section = section as? CardSection {
             return doc.cards[section.cardIndex].markdown
         }
-        if let section = section as? MobiledocListSection {
+        if let section = section as? ListSection {
             return section.markers.map({ "* \($0.value)" }).joined(separator: "\n")
         }
         return ""
