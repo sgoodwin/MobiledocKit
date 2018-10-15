@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9B63F51A2174E9B8008863BF /* MobiledocKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B63F5102174E9B8008863BF /* MobiledocKit.framework */; };
-		9B63F51F2174E9B8008863BF /* MobiledocKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B63F51E2174E9B8008863BF /* MobiledocKitTests.swift */; };
 		9B63F5212174E9B8008863BF /* MobiledocKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B63F5132174E9B8008863BF /* MobiledocKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B63F52B2174E9D6008863BF /* MobileDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B63F52A2174E9D6008863BF /* MobileDoc.swift */; };
 		9B870C022174EB71006CB244 /* MobileDocTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B870C012174EB71006CB244 /* MobileDocTests.swift */; };
@@ -16,6 +15,9 @@
 		9B870C062174EBEC006CB244 /* invalidtitlemarkdowncard.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B870C052174EBEC006CB244 /* invalidtitlemarkdowncard.json */; };
 		9B870C082174EBFD006CB244 /* markdowncard.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B870C072174EBFD006CB244 /* markdowncard.json */; };
 		9B870C0A2174EF60006CB244 /* MarkdownRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B870C092174EF60006CB244 /* MarkdownRenderer.swift */; };
+		9B870C142174F1C3006CB244 /* MobiledocKit_Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B870C122174F1C3006CB244 /* MobiledocKit_Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B870C182174F1D6006CB244 /* MobileDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B63F52A2174E9D6008863BF /* MobileDoc.swift */; };
+		9B870C192174F1D9006CB244 /* MarkdownRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B870C092174EF60006CB244 /* MarkdownRenderer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +35,6 @@
 		9B63F5132174E9B8008863BF /* MobiledocKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobiledocKit.h; sourceTree = "<group>"; };
 		9B63F5142174E9B8008863BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B63F5192174E9B8008863BF /* MobiledocKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobiledocKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B63F51E2174E9B8008863BF /* MobiledocKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobiledocKitTests.swift; sourceTree = "<group>"; };
 		9B63F5202174E9B8008863BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B63F52A2174E9D6008863BF /* MobileDoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileDoc.swift; sourceTree = "<group>"; };
 		9B870C012174EB71006CB244 /* MobileDocTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileDocTests.swift; sourceTree = "<group>"; };
@@ -41,6 +42,9 @@
 		9B870C052174EBEC006CB244 /* invalidtitlemarkdowncard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = invalidtitlemarkdowncard.json; sourceTree = "<group>"; };
 		9B870C072174EBFD006CB244 /* markdowncard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = markdowncard.json; sourceTree = "<group>"; };
 		9B870C092174EF60006CB244 /* MarkdownRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownRenderer.swift; sourceTree = "<group>"; };
+		9B870C102174F1C3006CB244 /* MobiledocKit_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MobiledocKit_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B870C122174F1C3006CB244 /* MobiledocKit_Mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobiledocKit_Mac.h; sourceTree = "<group>"; };
+		9B870C132174F1C3006CB244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B870C0D2174F1C3006CB244 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -67,6 +78,7 @@
 			children = (
 				9B63F5122174E9B8008863BF /* MobiledocKit */,
 				9B63F51D2174E9B8008863BF /* MobiledocKitTests */,
+				9B870C112174F1C3006CB244 /* MobiledocKit Mac */,
 				9B63F5112174E9B8008863BF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -76,6 +88,7 @@
 			children = (
 				9B63F5102174E9B8008863BF /* MobiledocKit.framework */,
 				9B63F5192174E9B8008863BF /* MobiledocKitTests.xctest */,
+				9B870C102174F1C3006CB244 /* MobiledocKit_Mac.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,11 +110,19 @@
 				9B870C072174EBFD006CB244 /* markdowncard.json */,
 				9B870C052174EBEC006CB244 /* invalidtitlemarkdowncard.json */,
 				9B870C032174EBDE006CB244 /* mobiledoccard.json */,
-				9B63F51E2174E9B8008863BF /* MobiledocKitTests.swift */,
 				9B63F5202174E9B8008863BF /* Info.plist */,
 				9B870C012174EB71006CB244 /* MobileDocTests.swift */,
 			);
 			path = MobiledocKitTests;
+			sourceTree = "<group>";
+		};
+		9B870C112174F1C3006CB244 /* MobiledocKit Mac */ = {
+			isa = PBXGroup;
+			children = (
+				9B870C122174F1C3006CB244 /* MobiledocKit_Mac.h */,
+				9B870C132174F1C3006CB244 /* Info.plist */,
+			);
+			path = "MobiledocKit Mac";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +133,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B63F5212174E9B8008863BF /* MobiledocKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B870C0B2174F1C3006CB244 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B870C142174F1C3006CB244 /* MobiledocKit_Mac.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +183,24 @@
 			productReference = 9B63F5192174E9B8008863BF /* MobiledocKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		9B870C0F2174F1C3006CB244 /* MobiledocKit Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B870C152174F1C3006CB244 /* Build configuration list for PBXNativeTarget "MobiledocKit Mac" */;
+			buildPhases = (
+				9B870C0B2174F1C3006CB244 /* Headers */,
+				9B870C0C2174F1C3006CB244 /* Sources */,
+				9B870C0D2174F1C3006CB244 /* Frameworks */,
+				9B870C0E2174F1C3006CB244 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MobiledocKit Mac";
+			productName = "MobiledocKit Mac";
+			productReference = 9B870C102174F1C3006CB244 /* MobiledocKit_Mac.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -169,6 +216,9 @@
 						LastSwiftMigration = 1000;
 					};
 					9B63F5182174E9B8008863BF = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					9B870C0F2174F1C3006CB244 = {
 						CreatedOnToolsVersion = 10.0;
 					};
 				};
@@ -187,6 +237,7 @@
 			targets = (
 				9B63F50F2174E9B8008863BF /* MobiledocKit */,
 				9B63F5182174E9B8008863BF /* MobiledocKitTests */,
+				9B870C0F2174F1C3006CB244 /* MobiledocKit Mac */,
 			);
 		};
 /* End PBXProject section */
@@ -209,6 +260,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B870C0E2174F1C3006CB244 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -226,7 +284,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B870C022174EB71006CB244 /* MobileDocTests.swift in Sources */,
-				9B63F51F2174E9B8008863BF /* MobiledocKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B870C0C2174F1C3006CB244 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B870C182174F1D6006CB244 /* MobileDoc.swift in Sources */,
+				9B870C192174F1D9006CB244 /* MarkdownRenderer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +522,64 @@
 			};
 			name = Release;
 		};
+		9B870C162174F1C3006CB244 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = SYSB7DM9AH;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "MobiledocKit Mac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.roundwallsoftware.MobiledocKit-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		9B870C172174F1C3006CB244 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = SYSB7DM9AH;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "MobiledocKit Mac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.roundwallsoftware.MobiledocKit-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -482,6 +606,15 @@
 			buildConfigurations = (
 				9B63F5282174E9B8008863BF /* Debug */,
 				9B63F5292174E9B8008863BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B870C152174F1C3006CB244 /* Build configuration list for PBXNativeTarget "MobiledocKit Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B870C162174F1C3006CB244 /* Debug */,
+				9B870C172174F1C3006CB244 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
