@@ -42,7 +42,6 @@ public struct Mobiledoc: Codable, Equatable {
         while !sectionsContainer.isAtEnd {
             var sectionContainer = try sectionsContainer.nestedUnkeyedContainer()
             let sectionType = try sectionContainer.decode(SectionType.self)
-            print(sectionType)
             
             switch sectionType {
             case .card:
