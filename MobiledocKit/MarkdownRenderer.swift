@@ -7,10 +7,26 @@ import Foundation
 public struct MarkdownRenderer {
     public init() {}
     
-    func text(for markup: String) -> String {
+    func startText(for markup: String) -> String {
         switch markup {
         case "b":
             return "*"
+        case "i":
+            return "_"
+        case "h1":
+            return "#"
+        case "h2":
+            return "##"
+        default:
+            return ""
+        }
+    }
+    func endText(for markup: String) -> String {
+        switch markup {
+        case "b":
+            return "*"
+        case "i":
+            return "_"
         default:
             return ""
         }
@@ -22,13 +38,13 @@ public struct MarkdownRenderer {
                 let initialMarkup = section.tagName.rawValue
                 var openMarkers = [initialMarkup]
                 
-                var text = self.text(for: initialMarkup)
+                var text = startText(for: initialMarkup)
                 
                 for (markerIndex, marker) in section.markers.enumerated() {
                     for index in marker.markupIndexes {
                         let openMarker = doc.markups[index]
                         openMarkers.append(openMarker)
-                        text.append(self.text(for: openMarker))
+                        text.append(startText(for: openMarker))
                     }
                     
                     switch marker.textType {
@@ -41,7 +57,7 @@ public struct MarkdownRenderer {
                     
                     for _ in 0..<marker.numberOfClosedMarkups {
                         let marker = openMarkers.popLast()!
-                        text.append(self.text(for: marker))
+                        text.append(endText(for: marker))
                     }
                     
                     if markerIndex != (section.markers.endIndex-1) {

@@ -85,16 +85,24 @@ class MarkdownRendererTests: XCTestCase {
     
     func testRendererHandlesMarkups() {
         let doc = Mobiledoc(
-            markups: ["b"],
+            markups: ["b", "i", "h1", "h2"],
             sections: [
                 MarkerSection(tagName: .p, markers: [
-                    Marker(textType: .text, markupIndexes: [0], numberOfClosedMarkups: 1, value: "sup"),
+                    Marker(textType: .text, markupIndexes: [0], numberOfClosedMarkups: 0, value: "sup"),
+                    Marker(textType: .text, markupIndexes: [1], numberOfClosedMarkups: 2, value: "nah"),
+                ]),
+                MarkerSection(tagName: .p, markers: [
+                    Marker(textType: .text, markupIndexes: [2], numberOfClosedMarkups: 1, value: "title"),
+                ]),
+                MarkerSection(tagName: .p, markers: [
+                    Marker(textType: .text, markupIndexes: [3], numberOfClosedMarkups: 1, value: "subtitle")
                 ])
             ]
         )
         
         let rendered = MarkdownRenderer().render(doc)
-        XCTAssertEqual(rendered, "*sup*\n")
+        // It handles nesting even!
+        XCTAssertEqual(rendered, "*sup _nah_*\n#title\n##subtitle\n")
     }
 
 }
