@@ -7,7 +7,7 @@ import Foundation
 public struct Mobiledoc: Codable, Equatable {
     public let version: String
     public let markups: [String]
-    public let atoms = [String]()
+    public let atoms: [MobiledocAtom]
     public let cards: [MobiledocCard]
     public let sections: [Section]
     
@@ -19,11 +19,12 @@ public struct Mobiledoc: Codable, Equatable {
         case sections
     }
     
-    public init(markups: [String], cards: [MobiledocCard], sections: [Section]) {
+    public init(markups: [String] = [], atoms: [MobiledocAtom] = [], cards: [MobiledocCard] = [], sections: [Section]) {
         self.markups = markups
         self.cards = cards
         self.sections = sections
         self.version = "0.3.1"
+        self.atoms = atoms
     }
     
     public init(from decoder: Decoder) throws {
@@ -32,6 +33,7 @@ public struct Mobiledoc: Codable, Equatable {
         version = try container.decode(String.self, forKey: .version)
         cards = try container.decode([MobiledocCard].self, forKey: .cards)
         markups = try container.decode([String].self, forKey: .markups)
+        atoms = try container.decode([MobiledocAtom].self, forKey: .atoms)
         
         var parsed = [Section]()
         var sectionsContainer = try container.nestedUnkeyedContainer(forKey: .sections)
@@ -143,13 +145,39 @@ enum SectionType: Int, Codable, Equatable {
     case card = 10
 }
 
+public struct MobiledocAtom: Codable, Equatable {
+    let name: String
+    let text: String
+    let payload: [String: String]
+    
+    public init(name: String, text: String, payload: [String: String]) {
+        self.name = name
+        self.text = text
+        self.payload = payload
+    }
+    
+    public init(from decoder: Decoder) throws {
+        var values = try decoder.unkeyedContainer()
+        name = try values.decode(String.self)
+        text = try values.decode(String.self)
+        payload = try values.decode([String:String].self)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(name)
+        try container.encode(text)
+        try container.encode(payload)
+    }
+}
+
 public struct MobiledocCard: Codable, Equatable {
     public let title: String
     public let values: [String: String]
     
     public init(_ markdown: String) {
         self.title = "markdown"
-        self.values = ["cardName": "card-markdown", "markdown": markdown]
+        self.values = ["markdown": markdown]
     }
     
     public init(title: String, values: [String: String]) {

@@ -20,6 +20,7 @@
 		9B870C192174F1D9006CB244 /* MarkdownRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B870C092174EF60006CB244 /* MarkdownRenderer.swift */; };
 		9B893A6D218D942E0015735A /* article.md in Resources */ = {isa = PBXBuildFile; fileRef = 9B893A6C218D942E0015735A /* article.md */; };
 		9B893A6F218D945B0015735A /* MarkdownRendererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B893A6E218D945B0015735A /* MarkdownRendererTests.swift */; };
+		9B893A71218D9EB40015735A /* article_with_mentions.md in Resources */ = {isa = PBXBuildFile; fileRef = 9B893A70218D9EB40015735A /* article_with_mentions.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		9B870C132174F1C3006CB244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B893A6C218D942E0015735A /* article.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = article.md; sourceTree = "<group>"; };
 		9B893A6E218D945B0015735A /* MarkdownRendererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownRendererTests.swift; sourceTree = "<group>"; };
+		9B893A70218D9EB40015735A /* article_with_mentions.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = article_with_mentions.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				9B870C032174EBDE006CB244 /* mobiledoccard.json */,
 				9B870C072174EBFD006CB244 /* markdowncard.json */,
 				9B893A6C218D942E0015735A /* article.md */,
+				9B893A70218D9EB40015735A /* article_with_mentions.md */,
 			);
 			path = "Sample Content";
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			files = (
 				9B870C042174EBDE006CB244 /* mobiledoccard.json in Resources */,
 				9B893A6D218D942E0015735A /* article.md in Resources */,
+				9B893A71218D9EB40015735A /* article_with_mentions.md in Resources */,
 				9B411EB721845C630099E245 /* gibberish.json in Resources */,
 				9B870C082174EBFD006CB244 /* markdowncard.json in Resources */,
 			);

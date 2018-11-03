@@ -12,7 +12,6 @@ class MarkdownRendererTests: XCTestCase {
 
     func testGeneratingSampleArticle() {
         let doc = Mobiledoc(
-            markups: [],
             cards: [
                 MobiledocCard("This is a document I wrote.")
             ],
@@ -27,7 +26,7 @@ class MarkdownRendererTests: XCTestCase {
             ]
         )
         
-        let rendered = renderMarkdown(doc)
+        let rendered = MarkdownRenderer().render(doc)
         let url = dummyBundle.url(forResource: "article", withExtension: "md")!
         let raw = try! Data(contentsOf: url)
         let article = String(data: raw, encoding: .utf8)!
@@ -38,7 +37,6 @@ class MarkdownRendererTests: XCTestCase {
     
     func testRendererIgnoresUnknownCards() {
         let doc = Mobiledoc(
-            markups: [],
             cards: [
                 MobiledocCard("This is a document I wrote."),
                 MobiledocCard(title: "poopin", values: ["content": "doesn't matter"])
@@ -55,12 +53,48 @@ class MarkdownRendererTests: XCTestCase {
             ]
         )
         
-        let rendered = renderMarkdown(doc)
+        let rendered = MarkdownRenderer().render(doc)
         let url = dummyBundle.url(forResource: "article", withExtension: "md")!
         let raw = try! Data(contentsOf: url)
         let article = String(data: raw, encoding: .utf8)!
         
         XCTAssertEqual(rendered, article)
+    }
+    
+    func testRendererTreatsAtomsAsPlaintext() {
+        let doc = Mobiledoc(
+            atoms: [
+                MobiledocAtom(name: "mention", text: "@bob", payload: ["id": "xxx"])
+            ],
+            sections: [
+                MarkerSection(tagName: .p, markers: [
+                    Marker(text: "I mention"),
+                    Marker(textType: .atom, markupIndexes: [], numberOfClosedMarkups: 0, value: "0"),
+                    Marker(text: "sometimes.")
+                ])
+            ]
+        )
+        
+        let rendered = MarkdownRenderer().render(doc)
+        let url = dummyBundle.url(forResource: "article_with_mentions", withExtension: "md")!
+        let raw = try! Data(contentsOf: url)
+        let article = String(data: raw, encoding: .utf8)!
+        
+        XCTAssertEqual(rendered, article)
+    }
+    
+    func testRendererHandlesMarkups() {
+        let doc = Mobiledoc(
+            markups: ["b"],
+            sections: [
+                MarkerSection(tagName: .p, markers: [
+                    Marker(textType: .text, markupIndexes: [0], numberOfClosedMarkups: 1, value: "sup"),
+                ])
+            ]
+        )
+        
+        let rendered = MarkdownRenderer().render(doc)
+        XCTAssertEqual(rendered, "*sup*\n")
     }
 
 }

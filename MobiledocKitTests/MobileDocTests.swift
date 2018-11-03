@@ -48,7 +48,22 @@ class MobileDocTests: XCTestCase {
     func testDecodingProblemPost() {
         let raw = "{\"version\":\"0.3.1\",\"atoms\":[],\"cards\":[[\"markdown\",{\"markdown\":\"Non-markdowned stuff\"}]],\"markups\":[],\"sections\":[[10,0],[1,\"p\",[[0,[],0,\"This is regular text\"]]]]}"
         let mobiledoc = try! JSONDecoder().decode(Mobiledoc.self, from: raw.data(using: .utf8)!)
-        XCTAssertEqual(renderMarkdown(mobiledoc), "Non-markdowned stuff\n\nThis is regular text\n")
+        
+        let expectedDoc = Mobiledoc(
+            cards: [
+                MobiledocCard("Non-markdowned stuff")
+            ],
+            sections: [
+                CardSection(cardIndex: 0),
+                MarkerSection(
+                    tagName: .p,
+                    markers: [
+                        Marker(text: "This is regular text")
+                    ]
+                )
+            ]
+        )
+        XCTAssertEqual(mobiledoc, expectedDoc)
     }
     
     func testReencoding() throws {
@@ -79,11 +94,12 @@ class MobileDocTests: XCTestCase {
         let mobiledoc: String
     }
     
-    func testDecodingGibberish() {
+    func testDecodingGibberish() throws {
+        // Because some API's embed encoded mobiledocs into other docs.
         let url = dummyBundle.url(forResource: "gibberish", withExtension: "json")!
-        let raw = try! Data(contentsOf: url)
+        let raw = try Data(contentsOf: url)
         let decoder = JSONDecoder()
-        let posts = try! decoder.decode(GibberishPosts.self, from: raw)
+        let posts = try decoder.decode(GibberishPosts.self, from: raw)
         let post = posts.posts[0]
         
         let doc = try? decoder.decode(Mobiledoc.self, from: post.mobiledoc.data(using: .utf8)!)
@@ -91,10 +107,31 @@ class MobileDocTests: XCTestCase {
     }
     
     func testNonEquivalentDocs() {
-        let doc1 = Mobiledoc(markups: [], cards: [MobiledocCard("sup")], sections: [CardSection(cardIndex: 0)])
-        let doc2 = Mobiledoc(markups: [], cards: [MobiledocCard("sup")], sections: [ImageSection(src: "image!")])
+        let doc1 = Mobiledoc(cards: [MobiledocCard("sup")], sections: [CardSection(cardIndex: 0)])
+        let doc2 = Mobiledoc(cards: [MobiledocCard("sup")], sections: [ImageSection(src: "image!")])
         
         XCTAssertNotEqual(doc1, doc2)
+    }
+    
+    func testEncodingAtoms() throws {
+        let atom = MobiledocAtom(name: "mention", text: "@bob", payload: ["id": "42"])
+        let encoder = JSONEncoder()
+        
+        let data = try encoder.encode(atom)
+        let raw = String(data: data, encoding: .utf8)!
+        
+        XCTAssertEqual(raw, "[\"mention\",\"@bob\",{\"id\":\"42\"}]")
+    }
+    
+    func testDecodingAtoms() throws {
+        let atom = MobiledocAtom(name: "mention", text: "@bob", payload: ["id": "42"])
+        let decoder = JSONDecoder()
+        let raw = "[\"mention\",\"@bob\",{\"id\":\"42\"}]"
+        
+        let data = raw.data(using: .utf8)!
+        let decoded = try decoder.decode(MobiledocAtom.self, from: data)
+        
+        XCTAssertEqual(atom, decoded)
     }
 }
 
