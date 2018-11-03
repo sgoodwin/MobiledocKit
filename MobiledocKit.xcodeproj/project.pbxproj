@@ -7,17 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B411EB721845C630099E245 /* gibberish.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B411EB621845C630099E245 /* gibberish.json */; };
 		9B63F51A2174E9B8008863BF /* MobiledocKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B63F5102174E9B8008863BF /* MobiledocKit.framework */; };
 		9B63F5212174E9B8008863BF /* MobiledocKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B63F5132174E9B8008863BF /* MobiledocKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B63F52B2174E9D6008863BF /* MobileDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B63F52A2174E9D6008863BF /* MobileDoc.swift */; };
 		9B870C022174EB71006CB244 /* MobileDocTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B870C012174EB71006CB244 /* MobileDocTests.swift */; };
 		9B870C042174EBDE006CB244 /* mobiledoccard.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B870C032174EBDE006CB244 /* mobiledoccard.json */; };
-		9B870C062174EBEC006CB244 /* invalidtitlemarkdowncard.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B870C052174EBEC006CB244 /* invalidtitlemarkdowncard.json */; };
 		9B870C082174EBFD006CB244 /* markdowncard.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B870C072174EBFD006CB244 /* markdowncard.json */; };
 		9B870C0A2174EF60006CB244 /* MarkdownRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B870C092174EF60006CB244 /* MarkdownRenderer.swift */; };
 		9B870C142174F1C3006CB244 /* MobiledocKit_Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B870C122174F1C3006CB244 /* MobiledocKit_Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B870C182174F1D6006CB244 /* MobileDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B63F52A2174E9D6008863BF /* MobileDoc.swift */; };
 		9B870C192174F1D9006CB244 /* MarkdownRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B870C092174EF60006CB244 /* MarkdownRenderer.swift */; };
+		9B893A6D218D942E0015735A /* article.md in Resources */ = {isa = PBXBuildFile; fileRef = 9B893A6C218D942E0015735A /* article.md */; };
+		9B893A6F218D945B0015735A /* MarkdownRendererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B893A6E218D945B0015735A /* MarkdownRendererTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B411EB621845C630099E245 /* gibberish.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gibberish.json; sourceTree = "<group>"; };
 		9B63F5102174E9B8008863BF /* MobiledocKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MobiledocKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B63F5132174E9B8008863BF /* MobiledocKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobiledocKit.h; sourceTree = "<group>"; };
 		9B63F5142174E9B8008863BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -39,12 +42,13 @@
 		9B63F52A2174E9D6008863BF /* MobileDoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileDoc.swift; sourceTree = "<group>"; };
 		9B870C012174EB71006CB244 /* MobileDocTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileDocTests.swift; sourceTree = "<group>"; };
 		9B870C032174EBDE006CB244 /* mobiledoccard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mobiledoccard.json; sourceTree = "<group>"; };
-		9B870C052174EBEC006CB244 /* invalidtitlemarkdowncard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = invalidtitlemarkdowncard.json; sourceTree = "<group>"; };
 		9B870C072174EBFD006CB244 /* markdowncard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = markdowncard.json; sourceTree = "<group>"; };
 		9B870C092174EF60006CB244 /* MarkdownRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownRenderer.swift; sourceTree = "<group>"; };
 		9B870C102174F1C3006CB244 /* MobiledocKit_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MobiledocKit_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B870C122174F1C3006CB244 /* MobiledocKit_Mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobiledocKit_Mac.h; sourceTree = "<group>"; };
 		9B870C132174F1C3006CB244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B893A6C218D942E0015735A /* article.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = article.md; sourceTree = "<group>"; };
+		9B893A6E218D945B0015735A /* MarkdownRendererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownRendererTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,11 +111,10 @@
 		9B63F51D2174E9B8008863BF /* MobiledocKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				9B870C072174EBFD006CB244 /* markdowncard.json */,
-				9B870C052174EBEC006CB244 /* invalidtitlemarkdowncard.json */,
-				9B870C032174EBDE006CB244 /* mobiledoccard.json */,
+				9B893A6B218D92380015735A /* Sample Content */,
 				9B63F5202174E9B8008863BF /* Info.plist */,
 				9B870C012174EB71006CB244 /* MobileDocTests.swift */,
+				9B893A6E218D945B0015735A /* MarkdownRendererTests.swift */,
 			);
 			path = MobiledocKitTests;
 			sourceTree = "<group>";
@@ -123,6 +126,17 @@
 				9B870C132174F1C3006CB244 /* Info.plist */,
 			);
 			path = "MobiledocKit Mac";
+			sourceTree = "<group>";
+		};
+		9B893A6B218D92380015735A /* Sample Content */ = {
+			isa = PBXGroup;
+			children = (
+				9B411EB621845C630099E245 /* gibberish.json */,
+				9B870C032174EBDE006CB244 /* mobiledoccard.json */,
+				9B870C072174EBFD006CB244 /* markdowncard.json */,
+				9B893A6C218D942E0015735A /* article.md */,
+			);
+			path = "Sample Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,7 +222,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Samuel Goodwin";
 				TargetAttributes = {
 					9B63F50F2174E9B8008863BF = {
@@ -255,8 +269,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B870C042174EBDE006CB244 /* mobiledoccard.json in Resources */,
+				9B893A6D218D942E0015735A /* article.md in Resources */,
+				9B411EB721845C630099E245 /* gibberish.json in Resources */,
 				9B870C082174EBFD006CB244 /* markdowncard.json in Resources */,
-				9B870C062174EBEC006CB244 /* invalidtitlemarkdowncard.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B870C022174EB71006CB244 /* MobileDocTests.swift in Sources */,
+				9B893A6F218D945B0015735A /* MarkdownRendererTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,7 +542,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -555,7 +571,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;

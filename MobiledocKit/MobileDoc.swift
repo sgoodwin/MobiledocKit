@@ -4,15 +4,11 @@
 
 import Foundation
 
-public enum MobiledocErrors: Error {
-    case missingMarkdown
-}
-
 public struct Mobiledoc: Codable, Equatable {
     public let version: String
     public let markups: [String]
     public let atoms = [String]()
-    public let cards: [MarkdownCard]
+    public let cards: [MobiledocCard]
     public let sections: [Section]
     
     enum CodingKeys: CodingKey {
@@ -23,18 +19,18 @@ public struct Mobiledoc: Codable, Equatable {
         case sections
     }
     
-    public init(version: String, markups: [String], cards: [MarkdownCard], sections: [Section]) {
-        self.version = version
+    public init(markups: [String], cards: [MobiledocCard], sections: [Section]) {
         self.markups = markups
         self.cards = cards
         self.sections = sections
+        self.version = "0.3.1"
     }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         version = try container.decode(String.self, forKey: .version)
-        cards = try container.decode([MarkdownCard].self, forKey: .cards)
+        cards = try container.decode([MobiledocCard].self, forKey: .cards)
         markups = try container.decode([String].self, forKey: .markups)
         
         var parsed = [Section]()
@@ -147,28 +143,33 @@ enum SectionType: Int, Codable, Equatable {
     case card = 10
 }
 
-public struct MarkdownCard: Codable, Equatable {
-    public let markdown: String
+public struct MobiledocCard: Codable, Equatable {
+    public let title: String
+    public let values: [String: String]
     
     public init(_ markdown: String) {
-        self.markdown = markdown
+        self.title = "markdown"
+        self.values = ["cardName": "card-markdown", "markdown": markdown]
+    }
+    
+    public init(title: String, values: [String: String]) {
+        self.title = title
+        self.values = values
     }
     
     public init(from decoder: Decoder) throws {
         var values = try decoder.unkeyedContainer()
         let title = try values.decode(String.self)
-        if title != "card-markdown" && title != "markdown" {
-            throw MobiledocErrors.missingMarkdown
-        }
         let realStuff = try values.decode([String:String].self)
         
-        self.markdown = realStuff["markdown"]!
+        self.title = title
+        self.values = realStuff
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
-        try  container.encode("card-markdown")
-        try container.encode(["cardName": "card-markdown", "markdown": markdown])
+        try container.encode(title)
+        try container.encode(values)
     }
 }
 
@@ -217,30 +218,42 @@ public struct MarkerSection: Section, Equatable {
     }
 }
 
+public enum TextTypeIdentifier: Int, Codable {
+    case text = 0
+    case atom = 1
+}
+
 public struct Marker: Codable, Equatable {
-    public let textType: Int
+    public let textType: TextTypeIdentifier
     public let markupIndexes: [Int]
     public let numberOfClosedMarkups: Int
     public let value: String
     
-    public init(textType: Int, markupIndexes: [Int], numberOfClosedMarkups: Int, value: String) {
+    public init(textType: TextTypeIdentifier, markupIndexes: [Int], numberOfClosedMarkups: Int, value: String) {
         self.textType = textType
         self.markupIndexes = markupIndexes
         self.numberOfClosedMarkups = numberOfClosedMarkups
         self.value = value
     }
     
+    public init(text: String) {
+        self.textType = .text
+        self.markupIndexes = []
+        self.numberOfClosedMarkups = 0
+        self.value = text
+    }
+    
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         
-        textType = try container.decode(Int.self)
+        textType = try container.decode(TextTypeIdentifier.self)
         markupIndexes = try container.decode([Int].self)
         numberOfClosedMarkups = try container.decode(Int.self)
         value = try container.decode(String.self)
     }
     
     public func encode(to encoder: Encoder) throws {
-        var container = try encoder.unkeyedContainer()
+        var container = encoder.unkeyedContainer()
         
         try container.encode(textType)
         try container.encode(markupIndexes)
