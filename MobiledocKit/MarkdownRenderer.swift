@@ -79,6 +79,8 @@ public struct MarkdownRenderer {
                      */
                 case "markdown":
                     return card.values["markdown"]?.appending("\n")
+                case "card-markdown":
+                    return card.values["markdown"]?.appending("\n")
                 default:
                     return nil
                 }
