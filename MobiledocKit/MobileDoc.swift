@@ -222,9 +222,11 @@ public struct ListSection: Section, Equatable {
 
 public struct ImageSection: Section, Equatable{
     public let src: String
+    public let caption: String?
     
-    public init(src: String) {
+    public init(src: String, caption: String? = nil) {
         self.src = src
+        self.caption = caption
     }
 }
 
