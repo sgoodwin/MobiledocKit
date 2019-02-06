@@ -67,7 +67,7 @@ public struct MarkdownRenderer {
                 return text
             }
             if let section = section as? ImageSection {
-                return "![](\(section.src))\n"
+                return "![\(section.caption ?? ""))](\(section.src))\n"
             }
             if let section = section as? CardSection {
                 let card = doc.cards[section.cardIndex]
