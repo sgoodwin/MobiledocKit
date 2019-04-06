@@ -69,7 +69,7 @@ class MarkdownRendererTests: XCTestCase {
             sections: [
                 MarkerSection(tagName: .p, markers: [
                     Marker(text: "I mention"),
-                    Marker(textType: .atom, markupIndexes: [], numberOfClosedMarkups: 0, value: "0"),
+                    Marker(textType: .atom, markupIndexes: [], numberOfClosedMarkups: 0, value: .atom(0)),
                     Marker(text: "sometimes.")
                 ])
             ]
@@ -88,14 +88,14 @@ class MarkdownRendererTests: XCTestCase {
             markups: ["b", "i", "h1", "h2"],
             sections: [
                 MarkerSection(tagName: .p, markers: [
-                    Marker(textType: .text, markupIndexes: [0], numberOfClosedMarkups: 0, value: "sup"),
-                    Marker(textType: .text, markupIndexes: [1], numberOfClosedMarkups: 2, value: "nah"),
+                    Marker(textType: .text, markupIndexes: [0], numberOfClosedMarkups: 0, value: .string("sup")),
+                    Marker(textType: .text, markupIndexes: [1], numberOfClosedMarkups: 2, value: .string("nah")),
                 ]),
                 MarkerSection(tagName: .p, markers: [
-                    Marker(textType: .text, markupIndexes: [2], numberOfClosedMarkups: 1, value: "title"),
+                    Marker(textType: .text, markupIndexes: [2], numberOfClosedMarkups: 1, value: .string("title")),
                 ]),
                 MarkerSection(tagName: .p, markers: [
-                    Marker(textType: .text, markupIndexes: [3], numberOfClosedMarkups: 1, value: "subtitle")
+                    Marker(textType: .text, markupIndexes: [3], numberOfClosedMarkups: 1, value: .string("subtitle"))
                 ])
             ]
         )
@@ -114,6 +114,23 @@ class MarkdownRendererTests: XCTestCase {
         let renderer = MarkdownRenderer()
         let rendered = renderer.render(doc).trimmingCharacters(in: .whitespacesAndNewlines)
         XCTAssertFalse(rendered.isEmpty)
+    }
+    
+    func testLegalDocumentIsHandledProperly() {
+        let path = dummyBundle.path(forResource: "terms_of_use", ofType: "json")!
+        do {
+            let raw = try Data(contentsOf: URL(fileURLWithPath: path))
+            let doc = try JSONDecoder().decode(Mobiledoc.self, from: raw)
+            
+            let renderer = MarkdownRenderer()
+            let rendered = renderer.render(doc)
+            XCTAssertFalse(rendered.isEmpty)
+        } catch {
+            print(error)
+            XCTFail(String(describing: error))
+        }
+        
+        
     }
 
 }

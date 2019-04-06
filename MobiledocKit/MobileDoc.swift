@@ -254,12 +254,21 @@ public enum TextTypeIdentifier: Int, Codable {
 }
 
 public struct Marker: Codable, Equatable {
+    public enum Value: Equatable {
+        case string(String)
+        case atom(Int)
+    }
+    
+    public enum ParseError: Error {
+        case invalidValue(String)
+    }
+    
     public let textType: TextTypeIdentifier
     public let markupIndexes: [Int]
     public let numberOfClosedMarkups: Int
-    public let value: String
+    public let value: Value
     
-    public init(textType: TextTypeIdentifier, markupIndexes: [Int], numberOfClosedMarkups: Int, value: String) {
+    public init(textType: TextTypeIdentifier, markupIndexes: [Int], numberOfClosedMarkups: Int, value: Value) {
         self.textType = textType
         self.markupIndexes = markupIndexes
         self.numberOfClosedMarkups = numberOfClosedMarkups
@@ -270,16 +279,45 @@ public struct Marker: Codable, Equatable {
         self.textType = .text
         self.markupIndexes = []
         self.numberOfClosedMarkups = 0
-        self.value = text
+        self.value = .string(text)
     }
     
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         
-        textType = try container.decode(TextTypeIdentifier.self)
-        markupIndexes = try container.decode([Int].self)
-        numberOfClosedMarkups = try container.decode(Int.self)
-        value = try container.decode(String.self)
+        func handleStuff(_ container: inout UnkeyedDecodingContainer) throws -> (TextTypeIdentifier, [Int], Int, Value) {
+            let textType = try container.decode(TextTypeIdentifier.self)
+            let markupIndexes = try container.decode([Int].self)
+            let numberOfClosedMarkups = try container.decode(Int.self)
+            
+            let value: Value
+            if let string = try? container.decode(String.self) {
+                value = .string(string)
+            } else if let index = try? container.decode(Int.self) {
+                value = .atom(index)
+            } else {
+                throw ParseError.invalidValue(String(describing: container))
+            }
+            return (textType, markupIndexes, numberOfClosedMarkups, value)
+        }
+        
+        do {
+            // This is because Ghost generated an invalid marker in one of my blog posts so this tries to handle that
+            // weird exception. Most work properly, but in the case of failure it's possible we can recover by looking
+            // one level nested deeper (because there's incorrectly an extra layer of array).
+            let values = try handleStuff(&container)
+            textType = values.0
+            markupIndexes = values.1
+            numberOfClosedMarkups = values.2
+            value = values.3
+        } catch {
+            container = try container.nestedUnkeyedContainer()
+            let values = try handleStuff(&container)
+            textType = values.0
+            markupIndexes = values.1
+            numberOfClosedMarkups = values.2
+            value = values.3
+        }
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -288,6 +326,20 @@ public struct Marker: Codable, Equatable {
         try container.encode(textType)
         try container.encode(markupIndexes)
         try container.encode(numberOfClosedMarkups)
-        try container.encode(value)
+        switch value {
+        case .atom(let index):
+            try container.encode(index)
+        case .string(let string):
+            try container.encode(string)
+        }
+    }
+    
+    func displayValue(_ atoms: [MobiledocAtom]) -> String {
+        switch value {
+        case .atom(let index):
+            return atoms[index].text
+        case .string(let text):
+            return text
+        }
     }
 }

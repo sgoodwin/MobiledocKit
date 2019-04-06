@@ -42,7 +42,7 @@ class MobileDocTests: XCTestCase {
             return
         }
         
-        XCTAssertEqual(section.markers.first?.value, "Hmmm")
+        XCTAssertEqual(section.markers.first?.value, .string("Hmmm"))
     }
     
     func testDecodingProblemPost() {
@@ -75,8 +75,8 @@ class MobileDocTests: XCTestCase {
             sections: [
                 CardSection(cardIndex:0),
                 ImageSection(src: "https://cdn.bulbagarden.net/upload/thumb/5/5d/010Caterpie.png/250px-010Caterpie.png"),
-                ListSection(tagName: .ol, markers: [Marker(textType: .text, markupIndexes: [0], numberOfClosedMarkups: 1, value: "bold?")]),
-                MarkerSection(tagName: .h1, markers: [Marker(textType: .text, markupIndexes: [], numberOfClosedMarkups: 0, value: "header?")])
+                ListSection(tagName: .ol, markers: [Marker(textType: .text, markupIndexes: [0], numberOfClosedMarkups: 1, value: .string("bold?"))]),
+                MarkerSection(tagName: .h1, markers: [Marker(textType: .text, markupIndexes: [], numberOfClosedMarkups: 0, value: .string("header?"))])
             ]
         )
         
@@ -133,5 +133,22 @@ class MobileDocTests: XCTestCase {
         
         XCTAssertEqual(atom, decoded)
     }
+    
+    func testParsingSingleMarker() throws {
+        let raw = """
+[
+0,
+[
+
+],
+0,
+"LICENSE"
+]
+""".data(using: .utf8)!
+        
+        let marker = try JSONDecoder().decode(Marker.self, from: raw)
+        XCTAssertEqual(marker.value, .string("LICENSE"))
+    }
 }
+
 
