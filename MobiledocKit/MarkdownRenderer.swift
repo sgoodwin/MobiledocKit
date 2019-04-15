@@ -7,26 +7,54 @@ import Foundation
 public struct MarkdownRenderer {
     public init() {}
     
-    func startText(for markup: String) -> String {
+    func startText(for markup: TagName, attributes: [String]? = nil) -> String {
         switch markup {
-        case "b":
+        case .b:
             return "*"
-        case "i":
+        case .i:
             return "_"
-        case "h1":
+        case .h1:
             return "#"
-        case "h2":
+        case .h2:
             return "##"
-        default:
+        case .aside:
+            return "<aside>"
+        case .blockquote:
+            return "<blockquote>"
+        case .h3:
+            return "###"
+        case .h4:
+            return "####"
+        case .h5:
+            return "#####"
+        case .h6:
+            return "######"
+        case .p:
             return ""
+        case .a:
+            if let _ = attributes {
+                return "["
+            } else {
+                return ""
+            }
         }
     }
-    func endText(for markup: String) -> String {
+    func endText(for markup: TagName, attributes: [String]? = nil) -> String {
         switch markup {
-        case "b":
+        case .b:
             return "*"
-        case "i":
+        case .i:
             return "_"
+        case .aside:
+            return "</aside>"
+        case .blockquote:
+            return "</blockquote>"
+        case .a:
+            if let attributes = attributes {
+                return "](\(attributes[1]))"
+            } else {
+                return ""
+            }
         default:
             return ""
         }
@@ -35,27 +63,23 @@ public struct MarkdownRenderer {
     public func render(_ doc: Mobiledoc) -> String {
         return doc.sections.compactMap({ (section) -> String? in
             if let section = section as? MarkerSection {
-                let initialMarkup = section.tagName.rawValue
-                var openMarkers = [initialMarkup]
+                let initialMarkup = section.tagName
+                var openMarkers = [MobiledocMarkup(initialMarkup)]
                 
                 var text = startText(for: initialMarkup)
                 
-                for (markerIndex, marker) in section.markers.enumerated() {
+                for marker in section.markers {
                     for index in marker.markupIndexes {
                         let openMarker = doc.markups[index]
                         openMarkers.append(openMarker)
-                        text.append(startText(for: openMarker))
+                        text.append(startText(for: openMarker.tagName, attributes: openMarker.attributes))
                     }
                     
                     text.append(marker.displayValue(doc.atoms))
                     
                     for _ in 0..<marker.numberOfClosedMarkups {
                         let marker = openMarkers.popLast()!
-                        text.append(endText(for: marker))
-                    }
-                    
-                    if markerIndex != (section.markers.endIndex-1) {
-                        text.append(" ")
+                        text.append(endText(for: marker.tagName, attributes: marker.attributes))
                     }
                 }
                 return text

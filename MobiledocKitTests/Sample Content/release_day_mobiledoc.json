@@ -1,0 +1,182 @@
+{
+  "atoms" : [
+
+  ],
+  "cards" : [
+    [
+      "image",
+      {
+        "alt" : "here",
+        "caption" : "Screenshot of Publicist",
+        "src" : "\/content\/images\/2019\/04\/Screen-Shot-2019-04-13-at-09.27.09.png",
+        "title" : ""
+      }
+    ]
+  ],
+  "markups" : [
+    [
+      "a",
+      [
+        "href",
+        "https:\/\/itunes.apple.com\/us\/app\/publicist\/id1449350225?mt=12"
+      ]
+    ],
+    [
+      "a"
+    ],
+    [
+      "a",
+      [
+        "href",
+        "https:\/\/roundwallsoftware.com\/introducing-publisher\/"
+      ]
+    ],
+    [
+      "a",
+      [
+        "href",
+        "https:\/\/twitter.com\/u\/bloomingbridges"
+      ]
+    ]
+  ],
+  "sections" : [
+    [
+      1,
+      "p",
+      [
+        [
+          0,
+          [
+
+          ],
+          0,
+          "At long last, Publicist is ready!"
+        ]
+      ]
+    ],
+    [
+      1,
+      "p",
+      [
+        [
+          0,
+          [
+
+          ],
+          0,
+          "You can download it in the "
+        ],
+        [
+          0,
+          [
+            0
+          ],
+          1,
+          "app store"
+        ],
+        [
+          0,
+          [
+            1
+          ],
+          1,
+          "."
+        ]
+      ]
+    ],
+    [
+      10,
+      0
+    ],
+    [
+      1,
+      "p",
+      [
+        [
+          0,
+          [
+
+          ],
+          0,
+          "Work began on this some time ago. You can read about the earlier part of the process in my "
+        ],
+        [
+          0,
+          [
+            2
+          ],
+          1,
+          "previous blog post"
+        ],
+        [
+          0,
+          [
+
+          ],
+          0,
+          ". After four more months of polishing and debating the last details, it's finally ready. I found a great designer, Florian (aka "
+        ],
+        [
+          0,
+          [
+            3
+          ],
+          1,
+          "@bloomingbridges"
+        ],
+        [
+          0,
+          [
+
+          ],
+          0,
+          ") and hassled him into helping me get this finished."
+        ]
+      ]
+    ],
+    [
+      1,
+      "p",
+      [
+        [
+          0,
+          [
+
+          ],
+          0,
+          "On day one, Publicist supports publishing blog posts with images on Wordpress and Ghost. Theres certainly room for other blog engines in the future, but I wanted to focus on a small core of support initially."
+        ]
+      ]
+    ],
+    [
+      1,
+      "p",
+      [
+        [
+          0,
+          [
+
+          ],
+          0,
+          "Publicist is subscription based and I've set up an initial free trial period of one month. I think this should be enough time for someone to see if the app works for them. Because it is a yearly subscription, I'm free to update the app as often as I possibly can. I have no motivation to hold back features and improvements for a major paid release because every customer has effectively already paid. Instead, my priority will be to make Publicist an app you will like enough to renew your subscription next year."
+        ]
+      ]
+    ],
+    [
+      1,
+      "p",
+      [
+        [
+          0,
+          [
+
+          ],
+          0,
+          "Because this is version one, I wanted to offer a special deal to my first customers. Anyone who subscribes in the first 6 months will get a special price of 19.99$\/year and that will stay the same for the first 2 years. As I improve the app over time, I will add to the price for new customers, but this will not affect you early adopters."
+        ]
+      ]
+    ]
+  ],
+  "version" : "0.3.1"
+}
+

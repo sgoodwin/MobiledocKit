@@ -66,9 +66,20 @@ class MobileDocTests: XCTestCase {
         XCTAssertEqual(mobiledoc, expectedDoc)
     }
     
+    func testDecodingReleaseDayPost() {
+        let url = dummyBundle.url(forResource: "release_day_mobiledoc", withExtension: "json")!
+        let decoder = JSONDecoder()
+        do {
+            let rawCard = try Data(contentsOf: url)
+            let _ = try decoder.decode(Mobiledoc.self, from: rawCard)
+        } catch{
+            XCTFail(String(describing: error))
+        }
+    }
+    
     func testReencoding() throws {
         let mobiledoc = Mobiledoc(
-            markups: ["b"],
+            markups: [MobiledocMarkup(.b)],
             cards: [
                 MobiledocCard("this is a *thing*")
             ],

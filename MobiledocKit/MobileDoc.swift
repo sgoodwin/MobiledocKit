@@ -6,7 +6,7 @@ import Foundation
 
 public struct Mobiledoc: Codable, Equatable {
     public let version: String
-    public let markups: [String]
+    public let markups: [MobiledocMarkup]
     public let atoms: [MobiledocAtom]
     public let cards: [MobiledocCard]
     public let sections: [Section]
@@ -19,7 +19,7 @@ public struct Mobiledoc: Codable, Equatable {
         case sections
     }
     
-    public init(markups: [String] = [], atoms: [MobiledocAtom] = [], cards: [MobiledocCard] = [], sections: [Section]) {
+    public init(markups: [MobiledocMarkup] = [], atoms: [MobiledocAtom] = [], cards: [MobiledocCard] = [], sections: [Section]) {
         self.markups = markups
         self.cards = cards
         self.sections = sections
@@ -32,7 +32,7 @@ public struct Mobiledoc: Codable, Equatable {
         
         version = try container.decode(String.self, forKey: .version)
         cards = try container.decode([MobiledocCard].self, forKey: .cards)
-        markups = try container.decode([String].self, forKey: .markups)
+        markups = try container.decode([MobiledocMarkup].self, forKey: .markups)
         atoms = try container.decode([MobiledocAtom].self, forKey: .atoms)
         
         var parsed = [Section]()
@@ -49,7 +49,7 @@ public struct Mobiledoc: Codable, Equatable {
                 let src = try sectionContainer.decode(String.self)
                 parsed.append(ImageSection(src: src))
             case .markup:
-                let tagName = try sectionContainer.decode(SectionTagName.self)
+                let tagName = try sectionContainer.decode(TagName.self)
                 let markers = try sectionContainer.decode([Marker].self)
                 parsed.append(MarkerSection(tagName: tagName, markers: markers))
             case .list:
@@ -126,7 +126,7 @@ extension Mobiledoc {
     }
 }
 
-public enum SectionTagName: String, Codable, Equatable {
+public enum TagName: String, Codable, Equatable {
     case aside
     case blockquote
     case h1
@@ -136,6 +136,9 @@ public enum SectionTagName: String, Codable, Equatable {
     case h5
     case h6
     case p
+    case b
+    case i
+    case a
 }
 
 enum SectionType: Int, Codable, Equatable {
@@ -168,6 +171,31 @@ public struct MobiledocAtom: Codable, Equatable {
         try container.encode(name)
         try container.encode(text)
         try container.encode(payload)
+    }
+}
+
+public struct MobiledocMarkup: Codable, Equatable {
+    public let tagName: TagName
+    public let attributes: [String]?
+    
+    public init(_ tagName: TagName, attributes: [String]? = nil) {
+        self.tagName = tagName
+        self.attributes = attributes
+    }
+    
+    public init(from decoder: Decoder) throws {
+        var values = try decoder.unkeyedContainer()
+        let tagName = try values.decode(TagName.self)
+        let attributes = try values.decodeIfPresent([String].self)
+        
+        self.tagName = tagName
+        self.attributes = attributes
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(tagName)
+        try container.encode(attributes)
     }
 }
 
@@ -239,10 +267,10 @@ public struct CardSection: Section, Equatable {
 }
 
 public struct MarkerSection: Section, Equatable {
-    public let tagName: SectionTagName
+    public let tagName: TagName
     public let markers: [Marker]
     
-    public init(tagName: SectionTagName, markers: [Marker]) {
+    public init(tagName: TagName, markers: [Marker]) {
         self.tagName = tagName
         self.markers = markers
     }

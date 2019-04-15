@@ -68,9 +68,9 @@ class MarkdownRendererTests: XCTestCase {
             ],
             sections: [
                 MarkerSection(tagName: .p, markers: [
-                    Marker(text: "I mention"),
+                    Marker(text: "I mention "),
                     Marker(textType: .atom, markupIndexes: [], numberOfClosedMarkups: 0, value: .atom(0)),
-                    Marker(text: "sometimes.")
+                    Marker(text: " sometimes.")
                 ])
             ]
         )
@@ -85,7 +85,7 @@ class MarkdownRendererTests: XCTestCase {
     
     func testRendererHandlesMarkups() {
         let doc = Mobiledoc(
-            markups: ["b", "i", "h1", "h2"],
+            markups: [MobiledocMarkup(.b), MobiledocMarkup(.i), MobiledocMarkup(.h1), MobiledocMarkup(.h2)],
             sections: [
                 MarkerSection(tagName: .p, markers: [
                     Marker(textType: .text, markupIndexes: [0], numberOfClosedMarkups: 0, value: .string("sup")),
@@ -102,7 +102,7 @@ class MarkdownRendererTests: XCTestCase {
         
         let rendered = MarkdownRenderer().render(doc)
         // It handles nesting even!
-        XCTAssertEqual(rendered, "*sup _nah_*\n#title\n##subtitle\n")
+        XCTAssertEqual(rendered, "*sup_nah_*\n#title\n##subtitle\n")
     }
 
     func testRenderHandlesProblemDoc() throws {
@@ -129,8 +129,20 @@ class MarkdownRendererTests: XCTestCase {
             print(error)
             XCTFail(String(describing: error))
         }
-        
-        
     }
 
+    func testRenderingProblemArticle() {
+        let path = dummyBundle.path(forResource: "release_day_mobiledoc", ofType: "json")!
+        do {
+            let raw = try Data(contentsOf: URL(fileURLWithPath: path))
+            let doc = try JSONDecoder().decode(Mobiledoc.self, from: raw)
+            
+            let renderer = MarkdownRenderer()
+            let rendered = renderer.render(doc)
+            XCTAssertFalse(rendered.isEmpty)
+        } catch {
+            print(error)
+            XCTFail(String(describing: error))
+        }
+    }
 }

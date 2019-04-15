@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B3D7A062264E0B1003F19A7 /* release_day_mobiledoc.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B3D7A052264E0B1003F19A7 /* release_day_mobiledoc.json */; };
 		9B411EB721845C630099E245 /* gibberish.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B411EB621845C630099E245 /* gibberish.json */; };
 		9B63F51A2174E9B8008863BF /* MobiledocKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B63F5102174E9B8008863BF /* MobiledocKit.framework */; };
 		9B63F5212174E9B8008863BF /* MobiledocKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B63F5132174E9B8008863BF /* MobiledocKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B3D7A052264E0B1003F19A7 /* release_day_mobiledoc.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = release_day_mobiledoc.json; sourceTree = "<group>"; };
 		9B411EB621845C630099E245 /* gibberish.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gibberish.json; sourceTree = "<group>"; };
 		9B63F5102174E9B8008863BF /* MobiledocKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MobiledocKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B63F5132174E9B8008863BF /* MobiledocKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobiledocKit.h; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				9B893A6C218D942E0015735A /* article.md */,
 				9B893A70218D9EB40015735A /* article_with_mentions.md */,
 				9B80ED8B2258980800C4927A /* terms_of_use.json */,
+				9B3D7A052264E0B1003F19A7 /* release_day_mobiledoc.json */,
 			);
 			path = "Sample Content";
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B3D7A062264E0B1003F19A7 /* release_day_mobiledoc.json in Resources */,
 				9B870C042174EBDE006CB244 /* mobiledoccard.json in Resources */,
 				9B893A6D218D942E0015735A /* article.md in Resources */,
 				9B893A71218D9EB40015735A /* article_with_mentions.md in Resources */,
