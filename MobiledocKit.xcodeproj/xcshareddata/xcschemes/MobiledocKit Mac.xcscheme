@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9B870C0F2174F1C3006CB244"
-               BuildableName = "MobiledocKit_Mac.framework"
+               BuildableName = "MobiledocKit.framework"
                BlueprintName = "MobiledocKit Mac"
                ReferencedContainer = "container:MobiledocKit.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9B870C0F2174F1C3006CB244"
-            BuildableName = "MobiledocKit_Mac.framework"
+            BuildableName = "MobiledocKit.framework"
             BlueprintName = "MobiledocKit Mac"
             ReferencedContainer = "container:MobiledocKit.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9B870C0F2174F1C3006CB244"
-            BuildableName = "MobiledocKit_Mac.framework"
+            BuildableName = "MobiledocKit.framework"
             BlueprintName = "MobiledocKit Mac"
             ReferencedContainer = "container:MobiledocKit.xcodeproj">
          </BuildableReference>
