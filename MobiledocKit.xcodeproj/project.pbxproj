@@ -12,6 +12,7 @@
 		9B63F51A2174E9B8008863BF /* MobiledocKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B63F5102174E9B8008863BF /* MobiledocKit.framework */; };
 		9B63F5212174E9B8008863BF /* MobiledocKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B63F5132174E9B8008863BF /* MobiledocKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B63F52B2174E9D6008863BF /* MobileDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B63F52A2174E9D6008863BF /* MobileDoc.swift */; };
+		9B6C86F62315E57100C6A832 /* publisher_release_mobiledoc.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B6C86F52315E57100C6A832 /* publisher_release_mobiledoc.json */; };
 		9B80ED8C2258980800C4927A /* terms_of_use.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B80ED8B2258980800C4927A /* terms_of_use.json */; };
 		9B870C022174EB71006CB244 /* MobileDocTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B870C012174EB71006CB244 /* MobileDocTests.swift */; };
 		9B870C042174EBDE006CB244 /* mobiledoccard.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B870C032174EBDE006CB244 /* mobiledoccard.json */; };
@@ -44,6 +45,7 @@
 		9B63F5192174E9B8008863BF /* MobiledocKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobiledocKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B63F5202174E9B8008863BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B63F52A2174E9D6008863BF /* MobileDoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileDoc.swift; sourceTree = "<group>"; };
+		9B6C86F52315E57100C6A832 /* publisher_release_mobiledoc.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = publisher_release_mobiledoc.json; sourceTree = "<group>"; };
 		9B80ED8B2258980800C4927A /* terms_of_use.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = terms_of_use.json; sourceTree = "<group>"; };
 		9B870C012174EB71006CB244 /* MobileDocTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileDocTests.swift; sourceTree = "<group>"; };
 		9B870C032174EBDE006CB244 /* mobiledoccard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mobiledoccard.json; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				9B893A70218D9EB40015735A /* article_with_mentions.md */,
 				9B80ED8B2258980800C4927A /* terms_of_use.json */,
 				9B3D7A052264E0B1003F19A7 /* release_day_mobiledoc.json */,
+				9B6C86F52315E57100C6A832 /* publisher_release_mobiledoc.json */,
 			);
 			path = "Sample Content";
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				9B893A71218D9EB40015735A /* article_with_mentions.md in Resources */,
 				9B411EB721845C630099E245 /* gibberish.json in Resources */,
 				9B80ED8C2258980800C4927A /* terms_of_use.json in Resources */,
+				9B6C86F62315E57100C6A832 /* publisher_release_mobiledoc.json in Resources */,
 				9B870C082174EBFD006CB244 /* markdowncard.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,6 +481,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.9;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.roundwallsoftware.MobiledocKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -506,6 +511,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.roundwallsoftware.MobiledocKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -528,6 +534,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.roundwallsoftware.MobiledocKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -547,6 +554,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.roundwallsoftware.MobiledocKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -573,6 +581,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.roundwallsoftware.MobiledocKit-Mac";
 				PRODUCT_NAME = MobiledocKit;
 				SDKROOT = macosx;
@@ -602,6 +611,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.roundwallsoftware.MobiledocKit-Mac";
 				PRODUCT_NAME = MobiledocKit;
 				SDKROOT = macosx;

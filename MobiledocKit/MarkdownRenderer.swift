@@ -37,6 +37,8 @@ public struct MarkdownRenderer {
             } else {
                 return ""
             }
+        case .em:
+            return "*"
         }
     }
     func endText(for markup: TagName, attributes: [String]? = nil) -> String {
@@ -55,6 +57,8 @@ public struct MarkdownRenderer {
             } else {
                 return ""
             }
+        case .em:
+            return "*"
         default:
             return ""
         }

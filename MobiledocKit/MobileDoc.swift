@@ -139,6 +139,7 @@ public enum TagName: String, Codable, Equatable {
     case b
     case i
     case a
+    case em
 }
 
 enum SectionType: Int, Codable, Equatable {
