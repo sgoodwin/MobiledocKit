@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B0C105B24179A3000A7C745 /* exampleWithImages.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B0C105A24179A3000A7C745 /* exampleWithImages.json */; };
 		9B3D7A062264E0B1003F19A7 /* release_day_mobiledoc.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B3D7A052264E0B1003F19A7 /* release_day_mobiledoc.json */; };
 		9B411EB721845C630099E245 /* gibberish.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B411EB621845C630099E245 /* gibberish.json */; };
 		9B63F51A2174E9B8008863BF /* MobiledocKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B63F5102174E9B8008863BF /* MobiledocKit.framework */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B0C105A24179A3000A7C745 /* exampleWithImages.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = exampleWithImages.json; sourceTree = "<group>"; };
 		9B3D7A052264E0B1003F19A7 /* release_day_mobiledoc.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = release_day_mobiledoc.json; sourceTree = "<group>"; };
 		9B411EB621845C630099E245 /* gibberish.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gibberish.json; sourceTree = "<group>"; };
 		9B63F5102174E9B8008863BF /* MobiledocKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MobiledocKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +149,7 @@
 				9B80ED8B2258980800C4927A /* terms_of_use.json */,
 				9B3D7A052264E0B1003F19A7 /* release_day_mobiledoc.json */,
 				9B6C86F52315E57100C6A832 /* publisher_release_mobiledoc.json */,
+				9B0C105A24179A3000A7C745 /* exampleWithImages.json */,
 			);
 			path = "Sample Content";
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 			files = (
 				9B3D7A062264E0B1003F19A7 /* release_day_mobiledoc.json in Resources */,
 				9B870C042174EBDE006CB244 /* mobiledoccard.json in Resources */,
+				9B0C105B24179A3000A7C745 /* exampleWithImages.json in Resources */,
 				9B893A6D218D942E0015735A /* article.md in Resources */,
 				9B893A71218D9EB40015735A /* article_with_mentions.md in Resources */,
 				9B411EB721845C630099E245 /* gibberish.json in Resources */,

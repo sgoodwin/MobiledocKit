@@ -103,6 +103,11 @@ public struct MarkdownRenderer {
                     return card.values["markdown"]?.appending("\n")
                 case "card-markdown":
                     return card.values["markdown"]?.appending("\n")
+                case "image":
+                    if let caption = card.values["caption"], let src = card.values["src"], let title = card.values["title"] {
+                        return "![\(caption)](\(src) \(title))"
+                    }
+                    return nil
                 default:
                     return nil
                 }

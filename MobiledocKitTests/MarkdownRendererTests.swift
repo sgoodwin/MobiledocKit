@@ -145,4 +145,16 @@ class MarkdownRendererTests: XCTestCase {
             XCTFail(String(describing: error))
         }
     }
+    
+    func testRenderingProblemArticleWithImage() throws {
+        let path = dummyBundle.path(forResource: "exampleWithImages", ofType: "json")!
+        
+        let raw = try Data(contentsOf: URL(fileURLWithPath: path))
+        let doc = try JSONDecoder().decode(Mobiledoc.self, from: raw)
+            
+        let renderer = MarkdownRenderer()
+        let rendered = renderer.render(doc)
+            
+        XCTAssert(rendered.hasPrefix("At long last, Publicist is ready!\nYou can download it in the [app store](https://itunes.apple.com/us/app/publicist/id1449350225?mt=12).\n![Screenshot of Publicist](/content/images/2019/04/Screen-Shot-2019-04-13-at-09.27.09.png"), "Incorrect render \(rendered)")
+    }
 }
