@@ -6,10 +6,6 @@ import XCTest
 import MobiledocKit
 
 class MarkdownRendererTests: XCTestCase {
-    lazy var dummyBundle: Bundle = {
-        return Bundle(for: self.classForCoder)
-    }()
-
     func testGeneratingSampleArticle() {
         let doc = Mobiledoc(
             cards: [
@@ -27,7 +23,7 @@ class MarkdownRendererTests: XCTestCase {
         )
         
         let rendered = MarkdownRenderer().render(doc)
-        let url = dummyBundle.url(forResource: "article", withExtension: "md")!
+        let url = Bundle.module.url(forResource: "article", withExtension: "md")!
         let raw = try! Data(contentsOf: url)
         let article = String(data: raw, encoding: .utf8)!
         
@@ -54,7 +50,7 @@ class MarkdownRendererTests: XCTestCase {
         )
         
         let rendered = MarkdownRenderer().render(doc)
-        let url = dummyBundle.url(forResource: "article", withExtension: "md")!
+        let url = Bundle.module.url(forResource: "article", withExtension: "md")!
         let raw = try! Data(contentsOf: url)
         let article = String(data: raw, encoding: .utf8)!
         
@@ -76,7 +72,7 @@ class MarkdownRendererTests: XCTestCase {
         )
         
         let rendered = MarkdownRenderer().render(doc)
-        let url = dummyBundle.url(forResource: "article_with_mentions", withExtension: "md")!
+        let url = Bundle.module.url(forResource: "article_with_mentions", withExtension: "md")!
         let raw = try! Data(contentsOf: url)
         let article = String(data: raw, encoding: .utf8)!
         
@@ -117,7 +113,7 @@ class MarkdownRendererTests: XCTestCase {
     }
     
     func testLegalDocumentIsHandledProperly() {
-        let path = dummyBundle.path(forResource: "terms_of_use", ofType: "json")!
+        let path = Bundle.module.path(forResource: "terms_of_use", ofType: "json")!
         do {
             let raw = try Data(contentsOf: URL(fileURLWithPath: path))
             let doc = try JSONDecoder().decode(Mobiledoc.self, from: raw)
@@ -132,7 +128,7 @@ class MarkdownRendererTests: XCTestCase {
     }
 
     func testRenderingProblemArticle() {
-        let path = dummyBundle.path(forResource: "release_day_mobiledoc", ofType: "json")!
+        let path = Bundle.module.path(forResource: "release_day_mobiledoc", ofType: "json")!
         do {
             let raw = try Data(contentsOf: URL(fileURLWithPath: path))
             let doc = try JSONDecoder().decode(Mobiledoc.self, from: raw)
@@ -147,7 +143,7 @@ class MarkdownRendererTests: XCTestCase {
     }
     
     func testRenderingProblemArticleWithImage() throws {
-        let path = dummyBundle.path(forResource: "exampleWithImages", ofType: "json")!
+        let path = Bundle.module.path(forResource: "exampleWithImages", ofType: "json")!
         
         let raw = try Data(contentsOf: URL(fileURLWithPath: path))
         let doc = try JSONDecoder().decode(Mobiledoc.self, from: raw)
