@@ -7,7 +7,7 @@ import XCTest
 
 class MobileDocTests: XCTestCase {
     lazy var dummyBundle: Bundle = {
-        return Bundle(for: self.classForCoder)
+        return Bundle.testBundle
     }()
     
     func testCreatingMobileDocFromJSON()  {

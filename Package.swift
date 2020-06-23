@@ -25,7 +25,7 @@ let package = Package(
             name: "MobiledocKitTests",
             dependencies: ["MobiledocKit"],
             resources: [
-                .process("Sample Content")
+                .process("Sample Contents")
             ]
         )
     ]
